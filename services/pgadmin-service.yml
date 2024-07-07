@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgadmin
+  namespace: default
+spec:
+  selector:
+    app: pgadmin
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 80
+  type: NodePort  # Cambiado a NodePort para exponerlo fuera del clúster

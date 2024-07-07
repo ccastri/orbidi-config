@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-kub
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-kub
+  template:
+    metadata:
+      labels:
+        app: db-kub
+    spec:
+      containers:
+      - name: db-kub
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          value: "password"  # Cambia esto a tu contraseña segura
+        - name: POSTGRES_DB
+          value: "orbidi"
+        - name: POSTGRES_USER
+          value: "postgres"
+        volumeMounts:
+        - name: db-data-kub
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: db-data-kub
+        persistentVolumeClaim:
+          claimName: db-pvc-k8

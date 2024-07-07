@@ -1,0 +1,49 @@
+# backend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  namespace: default
+spec:
+  selector:
+    app: app
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 80
+  # type: LoadBalancer
+---
+# backend-ingress.yaml
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: backend-ingress
+#   namespace: default
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /
+# spec:
+#   rules:
+#   - host: my-back.com
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: app
+#             port:
+#               number: 8000
+#       - path: /docs/
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: app
+#             port:
+#               number: 8000
+#       - path: /openapi.json
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: app
+#             port:
+#               number: 8000

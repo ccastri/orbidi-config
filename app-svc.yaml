@@ -1,0 +1,29 @@
+# backend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  namespace: default
+spec:
+  selector:
+    app: app-db-combined
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+    nodePort: 30001  # Choose a port within the range 30000-32767
+  type: NodePort
+
+# db-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-service
+  namespace: default
+spec:
+  selector:
+    app: app-db-combined
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432

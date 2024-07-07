@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-kub
+  namespace: default
+spec:
+  selector:
+    app: db-kub
+  # type: NodePort
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
